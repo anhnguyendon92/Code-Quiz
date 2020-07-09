@@ -10,8 +10,20 @@
     <div class="container">
         <div id="home" class="flex-center flex-column">
             <h1>Quiz About Anh Nguyen</h1>
-            <a class="btn" href="game.html">Start</a>
-            <a class="btn" href="score.html">Highscore</a>
+            <a class="btn" id="button">Start</a>
+            <a class="btn">Highscore</a>
+        </div>
+        <div id="question" class="hide">
+            <h2 id="title"></h2> 
+            <div id="choices">
+
+            </div>          
+        </div>
+        <div id="highscore" class="hide">
+            <h2>Done!</h2>
+            <p>Final Score:<span id="final-score"></span></p>
+            <input type="text" id="intials"/> 
+            <button id="submit"></button>
         </div>
     </div>
     <script src="Javascript.js"></script>

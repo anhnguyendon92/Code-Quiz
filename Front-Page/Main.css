@@ -77,6 +77,11 @@ h3 {
     display: none;
 }
 
+.hide {
+    display: none;
+}
+
+
 /* Buttons */
 
 .btn {

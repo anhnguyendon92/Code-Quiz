@@ -1,3 +1,10 @@
+var timeEl = document.getElementById('time');
+var time = 60;
+var timeId;
+
+
+
+// Game's Question
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
 console.log(choices);
@@ -13,9 +20,9 @@ let questions = [
         question: "What kind of dream car does Anh want to buy one day?",
         choice1: "Toyota Supra",
         choice2: "Tesla",
-        choice3: "Mini-Van",
+        choice3: "Porsche 911 Turbo",
         choice4: "4Runner",
-        answer: 1
+        answer: 3
     },
 
     {
@@ -56,7 +63,6 @@ let questions = [
 
 ]
 //Constants
-const CORRECT_BONUS = 10;
 const MAX_QUESTION = 5;
 
     startGame = () => {
@@ -70,7 +76,7 @@ const MAX_QUESTION = 5;
 
         if(avaliableQuestions.length === 0 || questionCounter > MAX_QUESTION) {
             //END OF THE PAGE
-            return window.location.assign("/end.html");
+            return window.location.assign("./end.html");
         }
 
         questionCounter++;
@@ -92,7 +98,7 @@ const MAX_QUESTION = 5;
         choice.addEventListener("click", e => {
             if(!acceptingAnswer) return;
 
-            acceptingAnswer = false;
+            acceptingAnswer = true;
             const selectedChoice = e.target;
             const selectedAnswer = selectedChoice.dataset["number"];
             getNewQuestion();

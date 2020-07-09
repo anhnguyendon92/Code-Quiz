@@ -13,18 +13,16 @@ let questions = [
     {
         question: "What kind of dream car does Anh want to buy one day?",
    
-        choices: ["toyota Supra", "Telsa", "Porsche 911 Turbo", "4Runner"],
+        choices: ["Toyota Supra", "Telsa", "Porsche 911 Turbo", "4Runner"],
         answer: "Porsche 911 turbo"
         
     },
 
-    {// Come back and change 21-54
+    {
         question: "What was the reason Anh decided to get into tech?",
-        choice1: "Money",
-        choice2: "Opportunities",
-        choice3: "Family",
-        choice4: "The fear of being a failure",
-        answer: 2
+    
+        Choices: ["Money", "Opportunites", "Family", "Fear of being a failure"],
+        answer: "Fear of being a failure"
     },
 
     {
@@ -76,3 +74,47 @@ choices.appendChild(choicebutton)
 })
 }
 button.onclick = startquiz;
+
+
+startGame = () => {
+    score = 0;
+    avaliableQuestions = [...questions];
+    console.log(avaliableQuestions);
+    getNewQuestion();
+};
+
+getNewQuestion = () => {
+
+    if(avaliableQuestions.length === 0 || questionCounter > MAX_QUESTION) {
+        //END OF THE PAGE
+        return window.location.assign("./end.html");
+    }
+
+    questionCounter++;
+    const questionIndex =  Math.floor(Math.random() * avaliableQuestions.length);
+    currentQuestion = avaliableQuestions[questionIndex];
+    question.innerText = currentQuestion.question;
+
+    choices.forEach( choice => {
+        const number = choice.dataset['number'];
+        choice.innerText = currentQuestion['choice' + number];
+    })
+};
+
+avaliableQuestions.splice("questionIndex", 1);
+
+acceptingAnswer = true;
+
+choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+        if(!acceptingAnswer) return;
+
+        acceptingAnswer = true;
+        const selectedChoice = e.target;
+        const selectedAnswer = selectedChoice.dataset["number"];
+        getNewQuestion();
+    });
+});
+
+startGame();
+

@@ -1,235 +1,258 @@
-var timeEl = document.getElementById('time'); 
+var secondsLeft = 30;
+var timerInterval = 0;
+var penalty = 10;
 
-var time = 60; 
+var timeEl = document.querySelector(".timer");
+var questionEl = document.getElementById('question');
 
-var timeId; 
+var button = document.getElementById('button');
 
-var questionEl = document.getElementById('question'); 
+var intials = document.getElementById('intials');
 
-var button = document.getElementById('button'); 
+var submit = document.getElementById('submit');
 
-var intials = document.getElementById('intials'); 
+var index = 0;
 
-var submit = document.getElementById('submit'); 
+let questionCounter = 0;
 
-var index = 0; 
 
-let questionCounter = 0; 
 
- 
- 
- 
+let questions = [
 
-let questions = [ 
+    {
 
-    { 
+        question: "What kind of dream car does Anh want to buy one day?",
 
-        question: "What kind of dream car does Anh want to buy one day?", 
 
- 
- 
 
-        choices: ["Toyota Supra", "Telsa", "Porsche 911 Turbo", "4Runner"], 
 
-        answer: "Porsche 911 Turbo" 
+        choices: ["Toyota Supra", "Telsa", "Porsche 911 Turbo", "4Runner"],
 
- 
- 
+        answer: "Porsche 911 Turbo"
 
-    }, 
 
- 
- 
 
-    { 
 
-        question: "What was the reason Anh decided to get into tech?", 
+    },
 
- 
- 
 
-        choices: ["Money", "Opportunites", "Family", "Fear of being a failure"], 
 
-        answer: "Fear of being a failure" 
 
-    }, 
+    {
 
- 
- 
+        question: "What was the reason Anh decided to get into tech?",
 
-    { 
 
-        question: "How many kids does he want one day?", 
 
-         
 
-        choices: ["0", "2", "5", "3"], 
+        choices: ["Money", "Opportunites", "Family", "Fear of being a failure"],
 
-        answer: "3" 
+        answer: "Fear of being a failure"
 
-    }, 
+    },
 
- 
- 
 
-    { 
 
-        question: "Where did Anh grow up?", 
 
- 
- 
+    {
 
-        choices: ["Vietnam", "Seattle", "Kentucky", "Canada"], 
+        question: "How many kids does he want one day?",
 
-        answer: "2" 
 
-    }, 
 
- 
- 
+        choices: ["0", "2", "5", "3"],
 
-    { 
+        answer: "3"
 
-        question: "What are his long term goals?", 
+    },
 
-         
 
-        choices: ["Web desgin", "Data science", "Macadon", "Software Engineer"], 
 
-        answer: 4 
 
-    }, 
+    {
 
- 
- 
+        question: "Where did Anh grow up?",
 
-] 
 
-console.log(questions[0].answer, "this is my array") 
 
-var MAX_QUESTION = questions.length; 
 
- 
- 
+        choices: ["Vietnam", "Seattle", "Kentucky", "Canada"],
 
-function startquiz() { 
+        answer: "2"
 
-    var home = document.getElementById('home'); 
+    },
 
-    home.setAttribute('class', 'hide'); 
 
-    questionEl.removeAttribute('class'); 
 
-    //Start timer  
 
-    question() 
+    {
 
-} 
+        question: "What are his long term goals?",
 
-function question() { 
 
-    var currentQuestion = questions[questionCounter]; 
 
-    console.log(currentQuestion, "the current question"); 
+        choices: ["Web desgin", "Data science", "Macadon", "Software Engineer"],
 
-    var title = document.getElementById('title'); 
+        answer: 4
 
-    title.textContent = currentQuestion.question 
+    },
 
-    choices.innerHTML = "" 
 
-    currentQuestion.choices.forEach(function (choice) { 
 
-        var choicebutton = document.createElement('button'); 
 
-        choicebutton.setAttribute('class', 'choice'); 
+]
 
-        choicebutton.setAttribute('value', choice); 
+console.log(questions[0].answer, "this is my array")
 
-        choicebutton.textContent = choice; 
+var MAX_QUESTION = questions.length;
 
-        choicebutton.onclick = questionClick; 
 
-        choices.appendChild(choicebutton) 
 
-    }) 
 
-} 
 
-function questionClick() { 
+function startquiz() {
 
-    console.log(this.value, questions[questionCounter].answer); 
+    var home = document.getElementById('home');
+    
 
-    if (this.value === questions[questionCounter].answer) { 
+    home.setAttribute('class', 'hide');
 
-        console.log('answer is correct'); 
+    questionEl.removeAttribute('class');
 
-        questionCounter++;  
+    
+    //Start timer 
+    function setTime() {
+        var timerInterval = setInterval(function() {
+          secondsLeft--;
+          timeEl.textContent = secondsLeft;
+          if(secondsLeft === 0) {
+            clearInterval(timerInterval);
+            }
+        }, 1000);
 
-        question(); 
+        document.getElementById('incorrect');{
+            sec -= 5;
+            document.getElementById('timerDisplay').innerHTML = '00:' + sec;
+        };
+    
+     
+    
+    }
+    
+   setTime();
 
-    } 
+}
 
-} 
+  
 
- 
- 
- 
+    question()
 
-button.onclick = startquiz; 
 
- 
- 
- 
 
-startGame = () => { 
+function question() {
 
-    score = 0; 
+    var currentQuestion = questions[questionCounter];
 
-    avaliableQuestions = [...questions]; 
+    console.log(currentQuestion, "the current question");
 
-    console.log(avaliableQuestions); 
+    var title = document.getElementById('title');
 
-    getNewQuestion(); 
+    title.textContent = currentQuestion.question
 
-}; 
+    choices.innerHTML = ""
 
- 
- 
+    currentQuestion.choices.forEach(function (choice) {
 
-getNewQuestion = () => { 
+        var choicebutton = document.createElement('button');
 
- 
- 
+        choicebutton.setAttribute('class', 'choice');
 
-    if (avaliableQuestions.length === 0 || questionCounter >= MAX_QUESTION) { 
+        choicebutton.setAttribute('value', choice);
+
+        choicebutton.textContent = choice;
+
+        choicebutton.onclick = questionClick;
+
+        choices.appendChild(choicebutton)
+
+    })
+
+}
+
+function questionClick() {
+
+    console.log(this.value, questions[questionCounter].answer);
+
+    if (this.value === questions[questionCounter].answer) {
+
+        console.log('answer is correct');
+
+        questionCounter++;
+
+        question();
+
+    }
+
+}
+
+
+
+
+
+button.onclick = startquiz;
+
+
+
+
+
+startGame = () => {
+
+    score = 0;
+
+    avaliableQuestions = [...questions];
+
+    console.log(avaliableQuestions);
+
+    getNewQuestion();
+
+};
+
+
+
+
+getNewQuestion = () => {
+
+
+
+
+    if (avaliableQuestions.length === 0 || questionCounter >= MAX_QUESTION) {
 
         //END OF THE PAGE 
 
-        return window.location.assign("./end.html"); 
+        return window.location.assign("./end.html");
 
-    } 
+    }
 
- 
- 
 
-    currentQuestion = avaliableQuestions[questionCounter]; 
 
-    question.innerText = currentQuestion.question; 
 
- 
- 
+    currentQuestion = avaliableQuestions[questionCounter];
 
-}; 
+    question.innerText = currentQuestion.question;
 
- 
- 
 
-acceptingAnswer = true; 
 
- 
- 
- 
- 
 
-startGame(); 
+};
+
+
+
+
+acceptingAnswer = true;
+
+
+
+
+
+
+startGame();

@@ -1,8 +1,9 @@
-var secondsLeft = 30;
-var timerInterval = 0;
-var penalty = 10;
+var secondsLeft = 60;
+var timer = 0;
+var penaltyTime = 10;
+var incorrect = document.querySelector('incorrect');
 
-var timeEl = document.querySelector(".timer");
+var timeEl = document.querySelector(".time-display");
 var questionEl = document.getElementById('question');
 
 var button = document.getElementById('button');
@@ -113,39 +114,35 @@ var MAX_QUESTION = questions.length;
 function startquiz() {
 
     var home = document.getElementById('home');
-    
+
 
     home.setAttribute('class', 'hide');
 
     questionEl.removeAttribute('class');
 
-    
+
     //Start timer 
-    function setTime() {
-        var timerInterval = setInterval(function() {
-          secondsLeft--;
-          timeEl.textContent = secondsLeft;
-          if(secondsLeft === 0) {
-            clearInterval(timerInterval);
+    function startTime() {
+        var timer = setInterval(function () {
+            secondsLeft--;
+            timeEl.textContent = 'Time:' + secondsLeft;
+            if (secondsLeft === 0) {
+                clearInterval(timer);
             }
         }, 1000);
-
-        document.getElementById('incorrect');{
-            sec -= 5;
-            document.getElementById('timerDisplay').innerHTML = '00:' + sec;
-        };
-    
-     
-    
     }
-    
-   setTime();
-
+ document.getElementById('button').addEventListener('click', function() {
+        secondsLeft = secondsLeft - penaltyTime;
+    });
+    startTime();
 }
 
-  
 
-    question()
+
+
+
+
+question()
 
 
 
@@ -184,14 +181,16 @@ function questionClick() {
     console.log(this.value, questions[questionCounter].answer);
 
     if (this.value === questions[questionCounter].answer) {
-
+    
         console.log('answer is correct');
 
         questionCounter++;
 
         question();
 
-    }
+    /*} else (this.value, question[questionCounter].incorrect);
+    console.log('incorrect is not correct');
+    secondsLeft = secondsLeft - penaltyTime;;*/
 
 }
 
@@ -229,7 +228,7 @@ getNewQuestion = () => {
 
         //END OF THE PAGE 
 
-        return window.location.assign("./end.html");
+        return window.location.assign("/end.html");
 
     }
 
@@ -249,10 +248,23 @@ getNewQuestion = () => {
 
 
 acceptingAnswer = true;
+function correction(response){
+    if(response){
+        alert.innerText= "Good"
+        console.log("Good")
+    }else {
+        alert.innerText="Wrong"
+        secondsLeft = secondsLeft - penaltyTime 
+        timer.innerHTML = count
+        console.log("Wrong")
+    }
+    setTimeout(function(){
+        alert.innerText=""
+        }, 1000);
+}
 
 
 
 
-
-
-startGame();
+}
+startquiz();

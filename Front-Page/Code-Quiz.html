@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code-Quiz</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Quiz Game</title>
+
+    
     <link rel="stylesheet" href="Main.css">
-
 </head>
-
 <body>
-    <div class="time-display"></div>
-    <div class="container">
-        <div id="home" class="flex-center flex-column">
-            <h1>Quiz About Anh Nguyen</h1>
-            <a class="btn" id="button">Start</a>
-            <a class="btn">Highscore</a>
-        </div>
-        <div id="question" class="hide">
-            <h2 id="title"></h2>
-            <div id="choices">
+
+    <nav class="navbar bg-dark">
+        <button class="text-light mb-0 btn" id="view-highscore-btn">High Scores</button>
+
+        <div class="text-light" id="time-display">00</div>
+    </nav>
+
+    <div class="container m-5 mx-auto" id = "main-container">
+        <div class="row m-2">
+            <div class="col text-center">
+                <div class="display-2">The Coding Quiz</div>
             </div>
         </div>
+        <div class="row m-2">
+            <div class="col text-center">
 
-        <div id="highscore" class="hide">
-            <a href="end.html"></a>
-            <h2>Done!</h2>
-            <p>Final Score:<span id="final-score"></span></p>
-            <input type="text" id="intials" />
-            <button id="submit"></button>
+                <button class="btn btn-primary btn-lg" id="start-btn">Start Game</button>
+            </div>
         </div>
     </div>
-    <script src="Javascript.js"></script>
-</body>
 
+    <div class="container ">
+            <div class="row m-2">
+                    <div class="col">
+
+                        <p id="outcomeDisplay"></p>
+                    </div>
+                </div>
+    </div>
+
+
+    <script src="./Javascript.js"></script>
+        <!-- Stores all the name js -->
+    <script src="./script.js"></script>
+
+</body>
 </html>

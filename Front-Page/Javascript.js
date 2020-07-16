@@ -1,270 +1,54 @@
-var secondsLeft = 60;
-var timer = 0;
-var penaltyTime = 10;
-var incorrect = document.querySelector('incorrect');
-
-var timeEl = document.querySelector(".time-display");
-var questionEl = document.getElementById('question');
-
-var button = document.getElementById('button');
-
-var intials = document.getElementById('intials');
-
-var submit = document.getElementById('submit');
-
-var index = 0;
-
-let questionCounter = 0;
-
-
-
-let questions = [
-
-    {
-
-        question: "What kind of dream car does Anh want to buy one day?",
-
-
-
-
-        choices: ["Toyota Supra", "Telsa", "Porsche 911 Turbo", "4Runner"],
-
-        answer: "Porsche 911 Turbo"
-
-
-
-
-    },
-
-
-
-
-    {
-
-        question: "What was the reason Anh decided to get into tech?",
-
-
-
-
-        choices: ["Money", "Opportunites", "Family", "Fear of being a failure"],
-
-        answer: "Fear of being a failure"
-
-    },
-
-
-
-
-    {
-
-        question: "How many kids does he want one day?",
-
-
-
-        choices: ["0", "2", "5", "3"],
-
-        answer: "3"
-
-    },
-
-
-
-
-    {
-
-        question: "Where did Anh grow up?",
-
-
-
-
-        choices: ["Vietnam", "Seattle", "Kentucky", "Canada"],
-
-        answer: "2"
-
-    },
-
-
-
-
-    {
-
-        question: "What are his long term goals?",
-
-
-
-        choices: ["Web desgin", "Data science", "Macadon", "Software Engineer"],
-
-        answer: 4
-
-    },
-
-
-
-
-]
-
-console.log(questions[0].answer, "this is my array")
-
-var MAX_QUESTION = questions.length;
-
-
-
-
-
-function startquiz() {
-
-    var home = document.getElementById('home');
-
-
-    home.setAttribute('class', 'hide');
-
-    questionEl.removeAttribute('class');
-
-
-    //Start timer 
-    function startTime() {
-        var timer = setInterval(function () {
-            secondsLeft--;
-            timeEl.textContent = 'Time:' + secondsLeft;
-            if (secondsLeft === 0) {
-                clearInterval(timer);
-            }
-        }, 1000);
-    }
- document.getElementById('button').addEventListener('click', function() {
-        secondsLeft = secondsLeft - penaltyTime;
-    });
-    startTime();
-}
-
-
-
-
-
-
-question()
-
-
-
-function question() {
-
-    var currentQuestion = questions[questionCounter];
-
-    console.log(currentQuestion, "the current question");
-
-    var title = document.getElementById('title');
-
-    title.textContent = currentQuestion.question
-
-    choices.innerHTML = ""
-
-    currentQuestion.choices.forEach(function (choice) {
-
-        var choicebutton = document.createElement('button');
-
-        choicebutton.setAttribute('class', 'choice');
-
-        choicebutton.setAttribute('value', choice);
-
-        choicebutton.textContent = choice;
-
-        choicebutton.onclick = questionClick;
-
-        choices.appendChild(choicebutton)
-
-    })
-
-}
-
-function questionClick() {
-
-    console.log(this.value, questions[questionCounter].answer);
-
-    if (this.value === questions[questionCounter].answer) {
-    
-        console.log('answer is correct');
-
-        questionCounter++;
-
-        question();
-
-    /*} else (this.value, question[questionCounter].incorrect);
-    console.log('incorrect is not correct');
-    secondsLeft = secondsLeft - penaltyTime;;*/
-
-}
-
-
-
-
-
-button.onclick = startquiz;
-
-
-
-
-
-startGame = () => {
-
-    score = 0;
-
-    avaliableQuestions = [...questions];
-
-    console.log(avaliableQuestions);
-
-    getNewQuestion();
-
-};
-
-
-
-
-getNewQuestion = () => {
-
-
-
-
-    if (avaliableQuestions.length === 0 || questionCounter >= MAX_QUESTION) {
-
-        //END OF THE PAGE 
-
-        return window.location.assign("/end.html");
-
-    }
-
-
-
-
-    currentQuestion = avaliableQuestions[questionCounter];
-
-    question.innerText = currentQuestion.question;
-
-
-
-
-};
-
-
-
-
-acceptingAnswer = true;
-function correction(response){
-    if(response){
-        alert.innerText= "Good"
-        console.log("Good")
-    }else {
-        alert.innerText="Wrong"
-        secondsLeft = secondsLeft - penaltyTime 
-        timer.innerHTML = count
-        console.log("Wrong")
-    }
-    setTimeout(function(){
-        alert.innerText=""
-        }, 1000);
-}
-
-
-
-
-}
-startquiz();
+function quizGame(){
+    let time = 0;
+    const defaultTime = (15*questions.length);
+    const penaltyTime = 15;
+    let currentQuestion = 0;
+    timeDisplayEl = document.getElementById("time-display")
+
+
+    const questions = [
+          {
+            title: "Commonly used data types DO NOT include:",
+            choices: ["strings", "booleans", "alerts", "numbers"],
+            answer: "alerts",
+            userAnswer: "alerts",
+            outcome: false,
+            time: 0
+          },
+          {
+            title: "The condition in an if / else statement is enclosed within ____.",
+            choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+            answer: "parentheses",
+            userAnswer: "",
+            outcome: false,
+            time: 0
+          },
+
+         {
+            title: "Inside which HTML element do we put the JavaScript?",
+            choices: ["script", "javascript", "js", "scripting"],
+            answer: "script",
+            userAnswer: "",
+            outcome: false,
+            time: 0
+          },
+  
+         {
+            title: 'Where is the correct place to insert a JavaScript?',
+            choices: ["Both the head section and the body section are correct", "The body section", "The head section", "The title section"],
+            answer: "The body section",
+            userAnswer: "",
+            outcome: false,
+            time: 0
+          },
+ 
+        {
+            title: 'What is the correct syntax for referring to an external script called "xxx.js"?',
+            choices: ["script src='xxx.js'", "script href='xxx.js'", "script name='xxx.js'", "script js='xxx.js'"],
+            answer: "script src='xxx.js'",
+            userAnswer: "",
+            outcome: false,
+            time: 0
+          }
+ 
+        ]}
